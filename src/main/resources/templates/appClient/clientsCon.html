@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="Mosaddek">
+		<meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+		<title>客户端现版本</title>
+
+		<link rel="stylesheet" href="/assets/css/bootstrap-table.css"/>
+		<link rel="stylesheet" href="/css/static/static.css">
+		<link rel="stylesheet" href="/css/static/apkContent.css">
+
+		<script src="/js/static/documentCSS.js"></script>
+		<script src="/js/static/documentJS.js"></script>
+		<script type="text/javascript" language="javascript" src="/assets/js/bootstrap-table.js"></script>
+		<script type="text/javascript" language="javascript" src="/assets/js/bootstrap-table-zh-CN.js"></script>
+		<script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+		<script src="/js/requestJS/clientJS.js"></script>
+	</head>
+	<body>
+
+		<div name="bgD" class="bgDark"></div>
+
+		<div name="bgDNew" class="bgDarkNew"></div>
+
+		<!-- 修改弹出框 -->
+		<div name="pupMentE" class="pupMent">
+			<section class="panel">
+				<header class="panel-heading">
+					版本架包编辑
+					<span class="tools pull-right">
+						<a class="fa fa-times" onclick="closePup()" style="cursor: pointer"></a>
+					</span>
+				</header>
+				<div class="panel-body profile-activity">
+					<input type="text" name="clientId" style="display: none" value=""/>
+					<label class="control-label">客户端版本状态</label>
+					<select name="status" class="form-control input-small" value="" style="margin: 0 0 2vw 0">
+						<option value="0">测试</option>
+						<option value="1">预发布</option>
+						<option value="2">正式</option>
+						<option value="3">下架</option>
+					</select>
+					<label class="control-label">apk状态</label>
+					<select name="apkStatus" class="form-control input-small" value="" style="margin: 0 0 2vw 0">
+						<option value="0">未审核</option>
+						<option value="1">审核中</option>
+						<option value="2">审核已通过</option>
+						<option value="3">审核未通过</option>
+					</select>
+					<label class="control-label">引导状态</label>
+					<select name="guideStatus" class="form-control input-small" value="" style="margin: 0 0 2vw 0">
+						<option value="0">允许使用</option>
+						<option value="1">提示更新</option>
+						<option value="2">强制更新</option>
+					</select>
+					<label class="control-label">引导目标</label>
+					<p style="font-size: 5px;color: red;margin: 0">提示:引导目标格式需为"com:caimao:1.0.0",即分支:渠道:版本号。</p>
+					<input type="text" class="form-control input-small" name="guideTarget" value="" style="margin: 0 0 1vw 0"/>
+					<label class="control-label">简介</label>
+					<textarea name="appMemo" class="form-control input-small" style="height: 5vw;"></textarea>
+					<div name="iosSpecial" style="display: none">
+						<label class="control-label">ios</label>
+						<textarea name="appMemo" class="form-control input-small" style="height: 5vw;"></textarea>
+					</div>
+				</div>
+				<div class="footer">
+					<button class="btn btn-success" onclick="submitEdit()">提交</button>
+					<div></div>
+					<button class="btn btn-danger" onclick="closePup()">关闭</button>
+				</div>
+			</section>
+		</div>
+
+		<!-- 新建弹出框 -->
+		<div name="pupMentN" class="pupMent">
+			<section class="panel">
+				<header class="panel-heading">
+					上传版本架包
+					<span class="tools pull-right">
+						<a class="fa fa-times" onclick="closePupNew()" style="cursor: pointer"></a>
+					</span>
+				</header>
+				<div class="panel-body profile-activity">
+					<label class="control-label">客户端版本状态</label>
+					<select name="clientType" class="form-control input-small" value="" style="margin: 0 0 1vw 0">
+						<option value="0">未知</option>
+						<option value="2">Android</option>
+						<option value="7">ios</option>
+					</select>
+					<label class="control-label">项目</label>
+					<select name="productId" class="form-control input-small" value="" style="margin: 0 0 1vw 0">
+						<option value="0">unknown</option>
+						<option value="1">lottery</option>
+						<option value="2">sports</option>
+						<option value="3">niuniu</option>
+						<option value="4">coin</option>
+						<option value="5">stock</option>
+					</select>
+					<label class="control-label">分支</label>
+					<input type="text" class="form-control input-small" name="branch" value="" style="margin: 0 0 1vw 0"/>
+					<label class="control-label">渠道</label>
+					<input type="text" class="form-control input-small" name="channel" value="" style="margin: 0 0 1vw 0"/>
+					<label class="control-label">版本</label>
+					<input type="text" class="form-control input-small" name="version" value="" style="margin: 0 0 1vw 0"/>
+					<label class="control-label">上传文件</label>
+					<div>
+						<span class="btn btn-success" style="position: relative;">
+							<i class="glyphicon glyphicon-pus"></i>
+							<span>Add files...</span>
+							<input id="doc" type="file" class="docClass" name="doc" multiple/>
+						</span>
+					</div>
+				</div>
+				<div class="footer">
+					<button class="btn btn-success" onclick="submitNewOrUpdate()">提交</button>
+					<div></div>
+					<button class="btn btn-danger" onclick="closePupNew()">关闭</button>
+				</div>
+			</section>
+		</div>
+
+		<!-- 客户端下载 -->
+		<div class="pupMent" name="qrCode">
+			<section class="panel">
+				<header class="panel-heading">
+					客户端下载
+					<span class="tools pull-right">
+						<a class="fa fa-times" onclick="closeQrCode()" style="cursor: pointer"></a>
+					</span>
+				</header>
+				<div class="panel-body profile-activity" style="text-align: center">
+					<div style="width: 200px;margin: 0 auto" id="qrCode"></div>
+					<a name="qrHref" style="cursor: pointer"></a>
+				</div>
+				<div class="footer">
+					<button class="btn btn-danger" onclick="closeQrCode()">关闭</button>
+				</div>
+			</section>
+		</div>
+
+		<!-- 客户端上传时的等待弹框 -->
+		<div class="waitMent" name="waitFrame">
+			<span>文件正在上传中，请稍等片刻....</span>
+		</div>
+
+		<!-- ios客户端上传的时候需要的特殊属性 -->
+		<div class="pupMent" name="plistField">
+			<section class="panel">
+				<header class="panel-heading">
+					plist属性配置
+					<span class="tools pull-right">
+						<a class="fa fa-times" onclick="closePlistInfo()" style="cursor: pointer"></a>
+					</span>
+				</header>
+				<div class="panel-body profile-activity" name="fieldBody">
+					<input type="text" name="pId" style="display: none"/>
+					<ul>
+					</ul>
+				</div>
+				<div class="footer">
+					<button class="btn btn-success" onclick="submitPlist()">提交</button>
+					<div></div>
+					<button class="btn btn-danger" onclick="closePlistInfo()">关闭</button>
+				</div>
+			</section>
+		</div>
+
+		<div class="row-content">
+			<div class="col-sm-12">
+				<section class="panel">
+					<header class="panel-heading">
+						apk、ipa版本列表
+					</header>
+					<div class="panel-body">
+						<div class="panel-search">
+							<div>
+								<label class="control-label">Id:</label>
+								<input type="text" class="form-control input-small" name="sId" value=""/>
+							</div>
+							<div>
+								<label class="control-label">类型:</label>
+								<select name="sClientType" class="form-control input-small" value="">
+									<option value="">未选</option>
+									<option value="2">Android</option>
+									<option value="7">ios</option>
+								</select>
+							</div>
+							<div>
+								<label class="control-label">项目Id:</label>
+								<select name="sProductId" class="form-control input-small" value="">
+									<option value="">未选</option>
+									<option value="0">unknown</option>
+									<option value="1">lottery</option>
+									<option value="2">sports</option>
+									<option value="3">niuniu</option>
+									<option value="4">coin</option>
+									<option value="5">stock</option>
+								</select>
+							</div>
+							<div>
+								<label class="control-label">分支:</label>
+								<input type="text" class="form-control input-small" name="sBranch" value=""/>
+							</div>
+							<div>
+								<label class="control-label">渠道:</label>
+								<input type="text" class="form-control input-small" name="sChannel" value=""/>
+							</div>
+							<div>
+								<label class="control-label">版本:</label>
+								<input type="text" class="form-control input-small" name="sVersion" value=""/>
+							</div>
+							<div>
+								<label class="control-label">上传人:</label>
+								<input type="text" class="form-control input-small" name="sPublisher" value=""/>
+							</div>
+							<div>
+								<label class="control-label">状态:</label>
+								<select name="sStatus" class="form-control input-small" value="">
+									<option value="">未选</option>
+									<option value="0">测试</option>
+									<option value="1">预发布</option>
+									<option value="2">正式</option>
+									<option value="3">下架</option>
+								</select>
+							</div>
+							<div>
+								<label class="control-label">引导状态:</label>
+								<select name="sGuideStatus" class="form-control input-small" value="">
+									<option value="">未选</option>
+									<option value="0">允许使用</option>
+									<option value="1">提示更新</option>
+									<option value="2">强制更新</option>
+								</select>
+							</div>
+							<div style="height: 34px;"></div>
+						</div>
+						<button class="btn btn-success" style="margin: 0 0 1vw 0" onclick="searchClients()">搜索</button>
+						<button class="btn btn-success" style="margin: 0 0 1vw 0" onclick="showPupNew()">新建</button>
+
+						<div class="adv-table">
+							<table class="display table table-bordered table-striped" id="client-table"></table>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</body>
+</html>

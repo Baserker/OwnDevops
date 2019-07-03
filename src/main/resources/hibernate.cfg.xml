@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:sqlserver://192.168.1.128:1433;DatabaseName=caimoo</property>
+    <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+      <mapping class="com.caimao.devops.entity.CsStaticdocRecord"/>
+      <mapping class="com.caimao.devops.entity.AdminNewRoleEntity"/>
+      <mapping class="com.caimao.devops.entity.AdminNewRoleFunctionEntity"/>
+      <mapping class="com.caimao.devops.entity.AdminNewUserEntity"/>
+      <mapping class="com.caimao.devops.entity.AdminNewUserRoleEntity"/>
+      <mapping class="com.caimao.devops.entity.CsAppPlistInfoEntity"/>
+      <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>

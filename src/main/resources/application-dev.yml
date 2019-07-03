@@ -1,0 +1,71 @@
+server:
+ port: 8080
+ servlet:
+    context-path: /
+
+debug: true
+
+spring:
+  mvc:
+    pathmatch:
+      use-suffix-pattern: true
+    contentnegotiation:
+      favor-path-extension: true
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://192.168.1.128:1433;DatabaseName=caimoo
+    username: cp
+    password: cp@cp
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 150MB
+      maxRequestSize: 150MB
+  #dubbo:
+  #    application:
+  #      name: caimao-devops #应用名
+  #    registry:
+  #      address: zookeeper://192.168.1.190 #zookeeper地址
+  #      port: 2181 #提供注册的端口
+  #    protocol:
+  #      name: dubbo
+  #      port: 20882 #dubbo服务暴露的端口
+  #    scan: com.caimao.devops.service.impl #扫描的包名
+  http:
+      encoding:
+        charset: UTF-8
+        enabled: true
+        force: true
+  devtools:
+      restart:
+        enabled: true  #设置开启热部署
+  freemarker:
+      cache: false
+
+  redis:
+    database: 0
+    password: caimao
+    port: 6379
+    host: 192.168.1.125
+    lettuce:
+     pool:
+      min-idle: 5
+      max-idle: 10
+      max-active: 8
+      max-wait: 1ms
+     shutdown-timeout: 100ms
+
+
+doc:
+  phyPosition:  D:/clients
+  docUrl:  http://192.168.1.21:80/clients
+  iosDocUrl:  http://192.168.1.21:80/clients
+  iosPlistUrl: http://192.168.1.21:8080/exter/ios
+  static:
+    doc: F:/ZipTest
+    commonUrl: http://60.190.13.162:6103/static
+    compressDoc: E:/compressDoc
+

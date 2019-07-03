@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>静态页面管理</title>
+
+    <link rel="stylesheet" href="/css/static/pageMana.css"/>
+    <link rel="stylesheet" href="/css/jquery.treeview.css"/>
+    <link rel="stylesheet" href="/css/static/static.css">
+    <script src="/js/static/documentCSS.js"></script>
+    <script src="/js/static/documentJS.js"></script>
+
+    <script src="/js/jquery.cookie.js"></script>
+    <script src="/js/jquery.treeview.js"></script>
+
+    <script type="text/javascript" src="/js/requestJS/pageMana.js"></script>
+
+    <style>
+        #hisClient-table button{
+            padding: 3px;
+            margin: 0 3px;
+        }
+
+        section .footer{
+            width: 60%;
+            display:flex;
+            flex-direction:row;
+            justify-content:center;
+            align-items:center;
+            margin: 0 auto;
+            position: relative;
+            bottom: 0;
+        }
+
+        section .footer div{
+            width: 5%;
+            height: 1vw;
+            float: left;
+        }
+
+        section .footer button{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+
+    <div name="bgD" class="bgDark"></div>
+
+    <!-- 添加文件目录 -->
+    <div name="docCataLog" class="pupMent">
+        <section class="panel">
+            <header class="panel-heading">
+                添加文件目录
+                <span class="tools pull-right">
+                    <a class="fa fa-times" onclick="closeCataLog()" style="cursor: pointer"></a>
+                </span>
+            </header>
+            <div class="panel-body profile-activity">
+                <label class="control-label">父目录</label>
+                <input type="text" class="form-control input-small" name="parentCataLog" value="" style="margin: 0 0 1vw 0" readonly="readonly"/>
+                <label class="control-label">文件名称</label>
+                <input type="text" class="form-control input-small" name="cataLogName" value="" style="margin: 0 0 1vw 0"/>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success" onclick="submitCataLog()">提交</button>
+                <div></div>
+                <button class="btn btn-danger" onclick="closeCataLog()">关闭</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- 提交文本类型文件（txt、html、css、js、log） -->
+    <div name="docMent" class="pupMent">
+        <section class="panel">
+            <header class="panel-heading">
+                添加文件目录
+                <span class="tools pull-right">
+                    <a class="fa fa-times" onclick="closeDocment()" style="cursor: pointer"></a>
+                </span>
+            </header>
+            <div class="panel-body profile-activity">
+                <label class="control-label">父目录</label>
+                <input type="text" class="form-control input-small" name="parentDoc" value="" style="margin: 0 0 1vw 0" readonly="readonly"/>
+                <label class="control-label">上传类型</label>
+                <select class="form-control input-small" name="SubmitType" value="" style="margin: 0 0 1vw 0">
+                    <option value="-1">未选</option>
+                    <option value="0">文件上传</option>
+                    <option value="1">内容上传</option>
+                </select>
+
+                <div name="contentSub" style="display: none">
+                    <label class="control-label">文件名称</label>
+                    <input type="text" class="form-control input-small" name="DocName" value="" style="margin: 0 0 1vw 0"/>
+                    <label class="control-label">文件类型</label>
+                    <select class="form-control input-small" name="DocType" value="" style="margin: 0 0 1vw 0">
+                        <option value="txt">txt</option>
+                        <option value="html">html</option>
+                        <option value="css">css</option>
+                        <option value="js">js</option>
+                        <option value="log">log</option>
+                    </select>
+                    <label class="control-label">文件内容</label>
+                    <textarea name="docContent" style="width: 100%;height: 200px"></textarea>
+                </div>
+                <div name="docSub" style="display: none">
+                    <label class="control-label">上传文件</label>
+                    <div>
+						<span class="btn btn-success" style="position: relative;">
+							<i class="glyphicon glyphicon-pus"></i>
+							<span>Add files...</span>
+							<input id="doc" type="file" class="docClass" name="doc" multiple/>
+						</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success" onclick="submitCreateDoc()">提交</button>
+                <div></div>
+                <button class="btn btn-danger" onclick="closeDocment()">关闭</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- 上传压缩文件 -->
+    <div name="zipMent" class="pupMent">
+        <section class="panel">
+            <header class="panel-heading">
+                上传压缩文件预览
+                <span class="tools pull-right">
+                    <a class="fa fa-times" onclick="closeZipMent()" style="cursor: pointer"></a>
+                </span>
+            </header>
+            <div class="panel-body profile-activity">
+                <label class="control-label">父目录</label>
+                <input type="text" class="form-control input-small" name="pressParent" value="" style="margin: 0 0 1vw 0" readonly="readonly"/>
+                <label class="control-label">上传压缩文件</label>
+                <div>
+                    <span class="btn btn-success" style="position: relative;margin: 0 0 1vw 0">
+                        <i class="glyphicon glyphicon-pus"></i>
+                        <span>Add files...</span>
+                        <input id="pressDoc" type="file" class="docClass" name="pressDoc" multiple/>
+                    </span>
+                </div>
+                <div name="exitDoc" style="display: none;">
+                    <label>已有压缩文件选择</label>
+                    <div>
+                        <select class="form-control input-small" name="exitDocs" value="" style="margin: 0 0 1vw 0"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success" onclick="submitZipDoc()">提交</button>
+                <div></div>
+                <button class="btn btn-danger" onclick="closeZipMent()">关闭</button>
+            </div>
+            <div class="ment-preview">
+                <section class="panel">
+                    <header class="panel-heading">
+                        压缩文件目录预览
+                    </header>
+                    <div class="panel-body profile-activity" id="previewTree">
+                    </div>
+                    <span name="pressDocPath" style="display: none"></span>
+                    <div class="footer">
+                        <button class="btn btn-success" onclick="confirmZipDoc()">提交</button>
+                        <div></div>
+                        <button class="btn btn-danger" onclick="closeZipMent()">关闭</button>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+
+    <div class="leftModule">
+        <section class="panel">
+            <header class="panel-heading" style="padding-left: 22px">
+                静态页面文件目录
+            </header>
+            <div class="panel-body">
+                <ul id="tree" class="filetree">
+                    <li>
+                        <span class="folder">F盘</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <div class="displayModule">
+        <section class="panel">
+            <header class="panel-heading">
+                <div>
+                    <button class="btn btn-primary" onclick="addCataLog()">新建目录</button>
+                    <button class="btn btn-primary" onclick="showCreateDoc()">上传普通文件</button>
+                    <button class="btn btn-primary" onclick="showZipDoc()">上传压缩文件</button>
+                    <button class="btn btn-primary" onclick="updateDoc()">保存</button>
+                </div>
+            </header>
+            <div class="panel-body">
+                <textarea name="fileDetail"></textarea>
+            </div>
+        </section>
+    </div>
+</body>
+<script>
+    $("#tree").treeview();
+    $("#previewTree").treeview();
+</script>
+</html>

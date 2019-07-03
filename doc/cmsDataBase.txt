@@ -1,0 +1,398 @@
+plist表：
+	CREATE TABLE [dbo].[CS_APP_PLIST_INFO] (
+      [ID] int  IDENTITY(1,1) NOT NULL,
+      [BRANCH] varchar(100) COLLATE Chinese_PRC_CI_AS  NOT NULL,
+      [PRODUCT_ID] int  NOT NULL,
+      [CHANNEL] varchar(100) COLLATE Chinese_PRC_CI_AS  NULL,
+      [CLIENT_FIELD] varchar(1024) COLLATE Chinese_PRC_CI_AS  NULL,
+      [PLIST_MODULE] varchar(5120) COLLATE Chinese_PRC_CI_AS  NULL,
+      CONSTRAINT [PK__CS_APP_P__3214EC27655D5123] PRIMARY KEY CLUSTERED ([ID])
+    WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+    ON [PRIMARY]
+    )
+    ON [PRIMARY]
+    GO
+
+    ALTER TABLE [dbo].[CS_APP_PLIST_INFO] SET (LOCK_ESCALATION = TABLE)
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'ID
+    ',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_PLIST_INFO',
+    'COLUMN', N'ID'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'分支',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_PLIST_INFO',
+    'COLUMN', N'BRANCH'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'项目ID',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_PLIST_INFO',
+    'COLUMN', N'PRODUCT_ID'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'渠道',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_PLIST_INFO',
+    'COLUMN', N'CHANNEL'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'板块信息',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_PLIST_INFO',
+    'COLUMN', N'CLIENT_FIELD'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'plist的项目模版',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_PLIST_INFO',
+    'COLUMN', N'PLIST_MODULE'
+	
+	
+client历史表：
+	CREATE TABLE [dbo].[CS_APP_HISVERSION] (
+	  [ID] int  IDENTITY(1,1) NOT NULL,
+	  [CLIENT_TYPE] tinyint  NOT NULL,
+	  [PRODUCT_ID] tinyint  NOT NULL,
+	  [BRANCH] varchar(32) COLLATE Chinese_PRC_CI_AS  NULL,
+	  [CHANNEL] varchar(256) COLLATE Chinese_PRC_CI_AS  NULL,
+	  [MD5] varchar(32) COLLATE Chinese_PRC_CI_AS  NULL,
+	  [SHA1] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+	  [PUBLISHER] int  NULL,
+	  [PUBLISH_TIME] datetime  NULL,
+	  [VERSION1] int DEFAULT ((0)) NULL,
+	  [VERSION2] int DEFAULT ((0)) NULL,
+	  [VERSION3] int DEFAULT ((0)) NULL,
+	  [APP_DESCRIBE] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+	  CONSTRAINT [PK__CS_APP_H__3214EC27EE0FD654] PRIMARY KEY CLUSTERED ([ID])
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
+	ON [PRIMARY]
+	)  
+	ON [PRIMARY]
+	GO
+
+	ALTER TABLE [dbo].[CS_APP_HISVERSION] SET (LOCK_ESCALATION = TABLE)
+	
+	
+client表：
+	CREATE TABLE [dbo].[CS_APP_VERSION] (
+      [ID] int  IDENTITY(1,1) NOT NULL,
+      [CLIENT_TYPE] tinyint  NOT NULL,
+      [PRODUCT_ID] int  NOT NULL,
+      [BRANCH] varchar(32) COLLATE Chinese_PRC_CI_AS  NULL,
+      [CHANNEL] varchar(128) COLLATE Chinese_PRC_CI_AS  NULL,
+      [DOC_POSITION] varchar(256) COLLATE Chinese_PRC_CI_AS  NULL,
+      [MD5] varchar(32) COLLATE Chinese_PRC_CI_AS  NULL,
+      [SHA1] varchar(256) COLLATE Chinese_PRC_CI_AS  NULL,
+      [PUBLISHER] int  NULL,
+      [STATUS] tinyint  NULL,
+      [GUIDE_STATUS] tinyint  NULL,
+      [GUIDE_TARGET] varchar(256) COLLATE Chinese_PRC_CI_AS  NULL,
+      [APP_MEMO] varchar(256) COLLATE Chinese_PRC_CI_AS  NULL,
+      [PUBLISH_TIME] datetime  NULL,
+      [VERSION1] int DEFAULT ((0)) NULL,
+      [VERSION2] int DEFAULT ((0)) NULL,
+      [VERSION3] int DEFAULT ((0)) NULL,
+      [DOC_URL] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+      [PLIST_FIELD] varchar(1024) COLLATE Chinese_PRC_CI_AS  NULL,
+      CONSTRAINT [PK__CS_APP_V__3214EC2753DF9A34] PRIMARY KEY CLUSTERED ([ID])
+    WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+    ON [PRIMARY]
+    )
+    ON [PRIMARY]
+    GO
+
+    ALTER TABLE [dbo].[CS_APP_VERSION] SET (LOCK_ESCALATION = TABLE)
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'客户端类型',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'CLIENT_TYPE'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'产品ID',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'PRODUCT_ID'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'分支',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'BRANCH'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'渠道',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'CHANNEL'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'文件存储位置',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'DOC_POSITION'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'文件MD5',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'MD5'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'文件SHA1（类似MD5的模式）',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'SHA1'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'上传人',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'PUBLISHER'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'状态',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'STATUS'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'引导状态',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'GUIDE_STATUS'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'引导目标',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'GUIDE_TARGET'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'简介',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'APP_MEMO'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'上传时间',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'PUBLISH_TIME'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'版本号1',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'VERSION1'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'版本号2',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'VERSION2'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'版本号3',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'VERSION3'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'文件访问地址',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'DOC_URL'
+    GO
+
+    EXEC sp_addextendedproperty
+    'MS_Description', N'ios的plist的Field信息',
+    'SCHEMA', N'dbo',
+    'TABLE', N'CS_APP_VERSION',
+    'COLUMN', N'PLIST_FIELD'
+	
+	
+角色表：
+	CREATE TABLE [dbo].[ADMIN_NEW_ROLE] (
+	  [ID] int  IDENTITY(1,1) NOT NULL,
+	  [NAME] varchar(100) COLLATE Chinese_PRC_CI_AS  NOT NULL,
+	  [DESCRIBE] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+	  [GROUP_NAME] varchar(100) COLLATE Chinese_PRC_CI_AS  NULL,
+	  [CREATE_TIME] datetime  NULL,
+	  [UPDATE_TIME] datetime  NULL,
+	  CONSTRAINT [PK__ADMIN_NE__3214EC274A1D5FC6] PRIMARY KEY CLUSTERED ([ID])
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
+	ON [PRIMARY]
+	)  
+	ON [PRIMARY]
+	GO
+
+	ALTER TABLE [dbo].[ADMIN_NEW_ROLE] SET (LOCK_ESCALATION = TABLE)
+	GO
+
+	EXEC sp_addextendedproperty
+	'MS_Description', N'角色名称',
+	'SCHEMA', N'dbo',
+	'TABLE', N'ADMIN_NEW_ROLE',
+	'COLUMN', N'NAME'
+	GO
+
+	EXEC sp_addextendedproperty
+	'MS_Description', N'角色简介',
+	'SCHEMA', N'dbo',
+	'TABLE', N'ADMIN_NEW_ROLE',
+	'COLUMN', N'DESCRIBE'
+	GO
+
+	EXEC sp_addextendedproperty
+	'MS_Description', N'部门名称',
+	'SCHEMA', N'dbo',
+	'TABLE', N'ADMIN_NEW_ROLE',
+	'COLUMN', N'GROUP_NAME'
+	GO
+
+	EXEC sp_addextendedproperty
+	'MS_Description', N'创建时间',
+	'SCHEMA', N'dbo',
+	'TABLE', N'ADMIN_NEW_ROLE',
+	'COLUMN', N'CREATE_TIME'
+	GO
+
+	EXEC sp_addextendedproperty
+	'MS_Description', N'更新时间',
+	'SCHEMA', N'dbo',
+	'TABLE', N'ADMIN_NEW_ROLE',
+	'COLUMN', N'UPDATE_TIME'
+	
+	
+角色功能表：
+	CREATE TABLE [dbo].[ADMIN_NEW_ROLE_FUNCTION] (
+	  [ID] int  IDENTITY(1,1) NOT NULL,
+	  [ROLE_ID] int  NOT NULL,
+	  [NAME] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+	  [FUNCTION_LIST] varchar(1000) COLLATE Chinese_PRC_CI_AS  NULL,
+	  CONSTRAINT [PK__ADMIN_NE__3214EC2756917124] PRIMARY KEY CLUSTERED ([ID])
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
+	ON [PRIMARY]
+	)  
+	ON [PRIMARY]
+	GO
+
+	ALTER TABLE [dbo].[ADMIN_NEW_ROLE_FUNCTION] SET (LOCK_ESCALATION = TABLE)
+	
+	
+用户表：
+	CREATE TABLE [dbo].[ADMIN_NEW_USER] (
+	  [ID] int  IDENTITY(1,1) NOT NULL,
+	  [USERNAME] varchar(100) COLLATE Chinese_PRC_CI_AS  NOT NULL,
+	  [PASSWORD] varchar(255) COLLATE Chinese_PRC_CI_AS  NOT NULL,
+	  [NAME] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+	  [CREATE_TIME] datetime  NULL,
+	  [UPDATE_TIME] datetime  NULL,
+	  CONSTRAINT [PK__ADMIN_NE__3214EC273D502CAD] PRIMARY KEY CLUSTERED ([ID])
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
+	ON [PRIMARY]
+	)  
+	ON [PRIMARY]
+	GO
+
+	ALTER TABLE [dbo].[ADMIN_NEW_USER] SET (LOCK_ESCALATION = TABLE)
+	GO
+
+	EXEC sp_addextendedproperty
+	'MS_Description', N'用户名',
+	'SCHEMA', N'dbo',
+	'TABLE', N'ADMIN_NEW_USER',
+	'COLUMN', N'USERNAME'
+	GO
+
+	EXEC sp_addextendedproperty
+	'MS_Description', N'密码',
+	'SCHEMA', N'dbo',
+	'TABLE', N'ADMIN_NEW_USER',
+	'COLUMN', N'PASSWORD'
+	GO
+
+	EXEC sp_addextendedproperty
+	'MS_Description', N'真实名称',
+	'SCHEMA', N'dbo',
+	'TABLE', N'ADMIN_NEW_USER',
+	'COLUMN', N'NAME'
+	GO
+
+	EXEC sp_addextendedproperty
+	'MS_Description', N'创建时间',
+	'SCHEMA', N'dbo',
+	'TABLE', N'ADMIN_NEW_USER',
+	'COLUMN', N'CREATE_TIME'
+	GO
+
+	EXEC sp_addextendedproperty
+	'MS_Description', N'更新时间',
+	'SCHEMA', N'dbo',
+	'TABLE', N'ADMIN_NEW_USER',
+	'COLUMN', N'UPDATE_TIME'
+	
+	
+用户角色表：
+	CREATE TABLE [dbo].[ADMIN_NEW_USER_ROLE] (
+	  [ID] int  IDENTITY(1,1) NOT NULL,
+	  [USER_ID] int  NOT NULL,
+	  [ROLE_ID] int  NOT NULL,
+	  CONSTRAINT [PK__ADMIN_NE__3214EC272406ABF9] PRIMARY KEY CLUSTERED ([ID])
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
+	ON [PRIMARY]
+	)  
+	ON [PRIMARY]
+	GO
+
+	ALTER TABLE [dbo].[ADMIN_NEW_USER_ROLE] SET (LOCK_ESCALATION = TABLE)
+	
+
+静态文件上传记录表：
+	CREATE TABLE [dbo].[CS_STATICDOC_RECORD] (
+	  [ID] int  IDENTITY(1,1) NOT NULL,
+	  [DOC_NAME] varchar(127) COLLATE Chinese_PRC_CI_AS  NULL,
+	  [DOC_TYPE] varchar(50) COLLATE Chinese_PRC_CI_AS  NOT NULL,
+	  [DOC_PATH] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+	  [DOC_URL] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+	  [PUBLISHER] int  NULL,
+	  [PUBLISH_TIME] datetime  NULL,
+	  [MD5] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+	  CONSTRAINT [PK__CS_STATI__3214EC27A04C2E1E] PRIMARY KEY CLUSTERED ([ID])
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
+	ON [PRIMARY]
+	)  
+	ON [PRIMARY]
+	GO
+
+	ALTER TABLE [dbo].[CS_STATICDOC_RECORD] SET (LOCK_ESCALATION = TABLE)

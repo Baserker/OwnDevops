@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>客户端历史版本</title>
+
+    <link rel="stylesheet" href="/assets/css/bootstrap-table.css" />
+    <link rel="stylesheet" href="/css/static/static.css">
+
+    <script src="/js/static/documentCSS.js"></script>
+    <script src="/js/static/documentJS.js"></script>
+    <script type="text/javascript" language="javascript" src="/assets/js/bootstrap-table.js"></script>
+    <script type="text/javascript" language="javascript" src="/assets/js/bootstrap-table-zh-CN.js"></script>
+
+    <script src="/js/requestJS/hisClientJS.js"></script>
+
+    <style>
+        #hisClient-table button{
+            padding: 3px;
+            margin: 0 3px;
+        }
+
+        section .footer{
+            width: 60%;
+            display:flex;
+            flex-direction:row;
+            justify-content:center;
+            align-items:center;
+            margin: 0 auto;
+            position: relative;
+            bottom: 0;
+        }
+
+        section .footer div{
+            width: 5%;
+            height: 1vw;
+            float: left;
+        }
+
+        section .footer button{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+
+    <div style="display: none">
+        <span name="id" th:text="${id}"></span>
+    </div>
+
+    <div name="bgD" class="bgDark"></div>
+
+    <!-- 修改弹出框 -->
+    <div name="pupMentE" class="pupMent">
+        <section class="panel">
+            <header class="panel-heading">
+                历史版本架包编辑
+                <span class="tools pull-right">
+						<a class="fa fa-times" onclick="closePup()" style="cursor: pointer"></a>
+					</span>
+            </header>
+            <div class="panel-body profile-activity">
+                <input type="text" name="clientId" style="display: none" value=""/>
+                <label class="control-label">简介</label>
+                <textarea name="appMemo" class="form-control input-small" style="height: 6vw;"></textarea>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success" onclick="submitEdit()">提交</button>
+                <div></div>
+                <button class="btn btn-danger" onclick="closePup()">关闭</button>
+            </div>
+        </section>
+    </div>
+
+    <div class="row-content">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    apk、ipa历史版本列表
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="hisClient-table"></table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</body>
+</html>

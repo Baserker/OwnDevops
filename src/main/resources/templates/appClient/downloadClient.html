@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ios下载页</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi">
+    <title>ios下载页</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/jquery.js"  type="text/javascript"></script>
+    <script type="text/javascript" src="/js/requestJS/iosDown.js"></script>
+    <style>
+        .downBtnClass{
+            width: 100%;
+            position: relative;
+            text-align: center;
+        }
+
+        .downBtnClass button{
+            height: 100%;
+            border-radius: 7px;
+            font-size: 5vw;
+            background-color: yellow;
+            padding: 1vw 4vw;
+        }
+    </style>
+</head>
+<body>
+    <div class="downBtnClass">
+        <span style="display: none" name="iosId" th:text="${id}"></span>
+        <span style="display: none" name="iosHref"></span>
+        <button name="downBtn">立即下载</button>
+    </div>
+</body>
+</html>

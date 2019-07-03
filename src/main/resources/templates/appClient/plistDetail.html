@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>plist详情</title>
+
+    <link rel="stylesheet" href="/assets/css/bootstrap-table.css"/>
+    <link rel="stylesheet" href="/css/static/static.css">
+
+    <script src="/js/static/documentCSS.js"></script>
+    <script src="/js/static/documentJS.js"></script>
+    <script src="/js/requestJS/plistDetail.js"></script>
+
+    <style>
+        html{
+            height: 100%;
+        }
+
+        body{
+            height: 100%;
+        }
+
+        .detailLeft{
+            width: 30%;
+            position: relative;
+            float: left;
+            height: 100%;
+        }
+
+        .detailLeft section{
+            height: 100%;
+            margin: 0;
+        }
+
+        .detailRight{
+            width: 70%;
+            position: relative;
+            float: left;
+            height: 100%;
+        }
+
+        .detailRight section{
+            height: 100%;
+            margin: 0;
+            padding: 0 1vw;
+        }
+
+        .detailRight section .panel-body{
+            height: 90%;
+        }
+
+        section .footer{
+            width: 60%;
+            display:flex;
+            flex-direction:row;
+            justify-content:center;
+            align-items:center;
+            margin: 0 auto;
+            position: relative;
+            bottom: 0;
+        }
+
+        section .footer div{
+            width: 5%;
+            height: 1vw;
+            float: left;
+        }
+
+        section .footer button{
+            float: left;
+        }
+
+
+
+        .detailLeft section .panel-body ul li{
+            height: 34px;
+            width: 100%;
+        }
+
+        .detailLeft section .panel-body ul li p{
+            float: left;
+            line-height: 34px;
+            width: 3%;
+        }
+
+        .detailLeft section .panel-body ul li .pTitle{
+            width: 8%;
+        }
+
+        .detailLeft section .panel-body ul li p i{
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .detailLeft section .panel-body ul li input{
+            float: left;
+            margin: 0 1%;
+        }
+
+        .detailLeft section .panel-body ul li input:nth-child(2){
+            width: 15%;
+        }
+
+        .detailLeft section .panel-body ul li input:nth-child(4){
+            width: 58%;
+        }
+    </style>
+</head>
+<body>
+
+    <span name="pId" style="display: none" th:text="${id}"></span>
+
+    <div class="detailLeft">
+        <section class="panel">
+            <header class="panel-heading">
+                plist基础属性配置
+            </header>
+            <div class="panel-body">
+                <label class="control-label">分支</label>
+                <input type="text" class="form-control input-small" name="branch" value="" style="margin: 0 0 1vw 0"/>
+                <label class="control-label">渠道</label>
+                <input type="text" class="form-control input-small" name="channel" value="" style="margin: 0 0 1vw 0"/>
+                <label class="control-label">项目ID</label>
+                <select name="productId" class="form-control input-small" value="" style="margin: 0 0 1vw 0">
+                    <option value="">未选</option>
+                    <option value="0">unknown</option>
+                    <option value="1">lottery</option>
+                    <option value="2">sports</option>
+                    <option value="3">niuniu</option>
+                    <option value="4">coin</option>
+                    <option value="5">stock</option>
+                </select>
+
+                <ul name="body-ul">
+                    <li>
+                        <p class='pTitle'>名称:</p>
+                        <input type='text' class='form-control input-small' value=''/>
+                        <p class='pTitle'>值:</p>
+                        <input type='text' class='form-control input-small' value=''/>
+                        <p><i class='fa fa-plus-circle' onclick='addPlistField($(this))'></i></p>
+                        <p><i class='fa fa-minus-circle' onclick='removePlistField($(this))'></i></p>
+                    </li>
+                </ul>
+
+                <button class="btn btn-primary" onclick="createXmlModule()">创建XML基础模版</button>
+            </div>
+            <div class="footer">
+                <button class="btn btn-success" onclick="submitPlistInfo()">提交</button>
+            </div>
+        </section>
+    </div>
+    <div class="detailRight">
+        <section class="panel">
+            <header class="panel-heading">
+                plist的XML展示
+            </header>
+            <div class="panel-body">
+                <textarea name="plistInfo" class="form-control input-small" style="height: 100%;"></textarea>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
